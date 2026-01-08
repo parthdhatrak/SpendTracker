@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { getUserFromRequest } from '@/lib/auth';
 import Transaction from '@/models/Transaction';
-import User from '@/models/User';
 import Account from '@/models/Account';
 import connectDB from '@/lib/mongodb';
 
@@ -11,8 +10,8 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 export async function POST(req: NextRequest) {
     try {
         let userContext = {
-            name: 'Demo User',
-            email: 'demo@example.com'
+            name: 'User',
+            email: ''
         };
         let totalBalance = 0;
         let accountDetails = '';
@@ -24,9 +23,9 @@ export async function POST(req: NextRequest) {
             const userId = userPayload?.userId;
 
             if (userId) {
-                // Fetch user context
-                const user = await User.findById(userId).select('name email');
-                if (user) userContext = user;
+                // Determine user name (Default to 'User' as we used Clerk)
+                // In a real app we would sync Clerk profile to DB or use currentUser() 
+                userContext.name = "User";
 
                 // Fetch User's accounts to get current balance
                 const accounts = await Account.find({ userId });
@@ -87,7 +86,7 @@ ${transactionContext}
 **User Question:** ${message}
 `;
 
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         const result = await model.generateContent(systemPrompt);
         const responseText = result.response.text();
 

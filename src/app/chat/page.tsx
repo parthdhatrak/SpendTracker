@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { Send, Bot, User, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -13,7 +13,7 @@ interface Message {
 }
 
 export default function ChatPage() {
-    const { user, isLoading: authLoading } = useAuth();
+    const { user, isLoaded, isSignedIn } = useUser();
     const router = useRouter();
     const [messages, setMessages] = useState<Message[]>([
         { role: 'bot', content: 'Hello! I am your AI financial assistant. \n\nI can help you analyze your spending, identify trends, or find specific transactions from your history. How can I help you today?' }
@@ -27,10 +27,10 @@ export default function ChatPage() {
     };
 
     useEffect(() => {
-        if (!authLoading && !user) {
+        if (isLoaded && !isSignedIn) {
             router.push('/login');
         }
-    }, [authLoading, user, router]);
+    }, [isLoaded, isSignedIn, router]);
 
     useEffect(() => {
         scrollToBottom();
@@ -79,7 +79,7 @@ export default function ChatPage() {
         );
     };
 
-    if (authLoading || !user) {
+    if (!isLoaded || !isSignedIn) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-black">
                 <div className="w-8 h-8 border-4 border-zinc-800 border-t-white rounded-full animate-spin" />

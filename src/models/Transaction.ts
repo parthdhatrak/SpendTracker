@@ -19,7 +19,7 @@ export type Category =
 export interface ITransaction extends Document {
     _id: mongoose.Types.ObjectId;
     accountId: mongoose.Types.ObjectId;
-    userId: mongoose.Types.ObjectId;
+    userId: string;
     date: Date;
     amount: number;
     type: TransactionType;
@@ -41,9 +41,9 @@ const TransactionSchema: Schema = new Schema(
             required: [true, 'Account ID is required'],
         },
         userId: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
+            type: String, // Clerk ID
             required: [true, 'User ID is required'],
+            index: true,
         },
         date: {
             type: Date,

@@ -2,15 +2,18 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
+import { useUser } from '@clerk/nextjs';
 
 interface Message {
     role: 'user' | 'bot';
     content: string;
 }
 
-export default function Chatbot({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+export default function Chatbot() {
+    const { user } = useUser();
+    const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { role: 'bot', content: 'Hi! I am your financial assistant. Ask me anything about your spending or transactions.' }
+        { role: 'bot', content: `Hi ${user?.firstName || 'there'}! I am your financial assistant. Ask me anything about your spending or transactions.` }
     ]);
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
@@ -21,8 +24,17 @@ export default function Chatbot({ isOpen, onClose }: { isOpen: boolean; onClose:
     };
 
     useEffect(() => {
-        scrollToBottom();
+        if (isOpen) {
+            scrollToBottom();
+        }
     }, [messages, isOpen]);
+
+    // Update welcome message when user loads
+    useEffect(() => {
+        if (user && messages.length === 1 && messages[0].role === 'bot') {
+            setMessages([{ role: 'bot', content: `Hi ${user.firstName}! I am your financial assistant. Ask me anything about your spending or transactions.` }]);
+        }
+    }, [user]);
 
     const formatMessage = (content: string) => {
         // Basic markdown-like formatting for bold text
@@ -70,6 +82,17 @@ export default function Chatbot({ isOpen, onClose }: { isOpen: boolean; onClose:
 
     return (
         <>
+            {/* Floating Trigger Button */}
+            {!isOpen && (
+                <button
+                    onClick={() => setIsOpen(true)}
+                    className="fixed bottom-6 right-6 p-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 group"
+                    aria-label="Open Financial Assistant"
+                >
+                    <MessageCircle size={24} className="group-hover:scale-110 transition-transform" />
+                </button>
+            )}
+
             {/* Chat Window */}
             {isOpen && (
                 <div className="fixed bottom-6 right-6 w-96 max-w-[90vw] h-[500px] max-h-[80vh] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl flex flex-col z-50 overflow-hidden animate-in slide-in-from-bottom-5 fade-in duration-300">
@@ -81,7 +104,7 @@ export default function Chatbot({ isOpen, onClose }: { isOpen: boolean; onClose:
                             <h3 className="font-semibold">Financial Assistant</h3>
                         </div>
                         <button
-                            onClick={onClose}
+                            onClick={() => setIsOpen(false)}
                             className="hover:bg-blue-700 p-1 rounded-full transition-colors"
                         >
                             <X size={20} />
@@ -159,3 +182,4 @@ export default function Chatbot({ isOpen, onClose }: { isOpen: boolean; onClose:
         </>
     );
 }
+

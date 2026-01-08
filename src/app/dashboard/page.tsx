@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import { useUser, useAuth } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import CategoryChart from '@/components/CategoryChart';
@@ -50,34 +50,35 @@ interface Transaction {
 }
 
 export default function DashboardPage() {
-    const { user, isLoading: authLoading, token } = useAuth();
+    const { user, isLoaded } = useUser();
+    // const { getToken } = useAuth(); // Not needed if using cookies
     const router = useRouter();
     const [analytics, setAnalytics] = useState<Analytics | null>(null);
     const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (!authLoading && !user) {
-            router.push('/login');
+        if (isLoaded && !user) {
+            router.push('/sign-in');
         }
-    }, [authLoading, user, router]);
+    }, [isLoaded, user, router]);
 
     useEffect(() => {
-        if (user && token) {
+        if (user) {
             fetchData();
         }
-    }, [user, token]);
+    }, [user]);
 
     // Refetch data when page becomes visible
     useEffect(() => {
         const handleVisibilityChange = () => {
-            if (document.visibilityState === 'visible' && user && token) {
+            if (document.visibilityState === 'visible' && user) {
                 fetchData();
             }
         };
 
         const handleFocus = () => {
-            if (user && token) {
+            if (user) {
                 fetchData();
             }
         };
@@ -89,12 +90,13 @@ export default function DashboardPage() {
             document.removeEventListener('visibilitychange', handleVisibilityChange);
             window.removeEventListener('focus', handleFocus);
         };
-    }, [user, token]);
+    }, [user]);
 
     const fetchData = async () => {
         try {
+            // const token = await getToken(); // Optional if APIs use cookie-based auth, but explicit is safer
             const analyticsRes = await fetch('/api/analytics?period=all', {
-                headers: { Authorization: `Bearer ${token}` },
+                // headers: { Authorization: `Bearer ${token}` }, // Cookie usually handles this automatically with Clerk
             });
             if (analyticsRes.ok) {
                 const data = await analyticsRes.json();
@@ -102,7 +104,7 @@ export default function DashboardPage() {
             }
 
             const txnRes = await fetch('/api/transactions?limit=5&sortBy=date&sortOrder=desc', {
-                headers: { Authorization: `Bearer ${token}` },
+                //  headers: { Authorization: `Bearer ${token}` },
             });
             if (txnRes.ok) {
                 const data = await txnRes.json();
@@ -115,7 +117,7 @@ export default function DashboardPage() {
         }
     };
 
-    if (authLoading || !user) {
+    if (!isLoaded || !user) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-black">
                 <div className="flex flex-col items-center gap-4">
@@ -146,7 +148,7 @@ export default function DashboardPage() {
                             Dashboard
                         </h1>
                         <p className="text-zinc-400 mt-2 text-lg font-light">
-                            Overview for {user.name.split(' ')[0]}
+                            Overview for {user?.firstName || 'User'}
                         </p>
                     </div>
                     <div className="flex items-center gap-3">

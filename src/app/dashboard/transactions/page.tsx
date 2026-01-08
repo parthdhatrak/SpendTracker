@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import TransactionList from '@/components/TransactionList';
 
@@ -22,7 +22,7 @@ interface Transaction {
 const CATEGORIES = ['All', 'Food', 'Travel', 'Shopping', 'Entertainment', 'Bills', 'Health', 'Education', 'Rent', 'Salary', 'Investment', 'Transfer', 'Other'];
 
 export default function TransactionsPage() {
-    const { user, isLoading: authLoading, token } = useAuth();
+    const { user, isLoaded } = useUser();
     const router = useRouter();
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -40,16 +40,16 @@ export default function TransactionsPage() {
     const [sortOrder, setSortOrder] = useState<'desc' | 'asc'>('desc');
 
     useEffect(() => {
-        if (!authLoading && !user) {
-            router.push('/login');
+        if (isLoaded && !user) {
+            router.push('/sign-in');
         }
-    }, [authLoading, user, router]);
+    }, [isLoaded, user, router]);
 
     useEffect(() => {
-        if (user && token) {
+        if (user) {
             fetchTransactions();
         }
-    }, [user, token, pagination.page, category, type, search, sortOrder]);
+    }, [user, pagination.page, category, type, search, sortOrder]);
 
     const fetchTransactions = async () => {
         setIsLoading(true);
@@ -66,7 +66,7 @@ export default function TransactionsPage() {
             if (search) params.append('search', search);
 
             const response = await fetch(`/api/transactions?${params}`, {
-                headers: { Authorization: `Bearer ${token}` },
+                // headers: { Authorization: `Bearer ${token}` },
             });
 
             if (response.ok) {
@@ -93,7 +93,7 @@ export default function TransactionsPage() {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+                    // Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({ transactionIds: ids }),
             });
@@ -110,7 +110,7 @@ export default function TransactionsPage() {
         setPagination(prev => ({ ...prev, page }));
     };
 
-    if (authLoading || !user) {
+    if (!isLoaded || !user) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-black">
                 <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin" />

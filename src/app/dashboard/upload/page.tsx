@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import { useUser, useAuth } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import FileUpload from '@/components/FileUpload';
 
 const BANKS = ['HDFC', 'SBI', 'ICICI', 'Axis', 'Kotak', 'PNB', 'BOB', 'Other'];
 
 export default function UploadPage() {
-    const { user, isLoading: authLoading, token } = useAuth();
+    const { user, isLoaded } = useUser();
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<'pdf' | 'sms'>('pdf');
     const [bankName, setBankName] = useState('Other');
@@ -17,10 +17,10 @@ export default function UploadPage() {
     const [result, setResult] = useState<{ success: boolean; message: string } | null>(null);
 
     useEffect(() => {
-        if (!authLoading && !user) {
-            router.push('/login');
+        if (isLoaded && !user) {
+            router.push('/sign-in');
         }
-    }, [authLoading, user, router]);
+    }, [isLoaded, user, router]);
 
     const handlePDFUpload = async (file: File) => {
         setIsUploading(true);
@@ -33,9 +33,9 @@ export default function UploadPage() {
 
             const response = await fetch('/api/upload/pdf', {
                 method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                // headers: {
+                //     Authorization: `Bearer ${token}`,
+                // },
                 body: formData,
             });
 
@@ -65,7 +65,7 @@ export default function UploadPage() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+                    // Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({ smsText, bankName }),
             });
@@ -85,7 +85,7 @@ export default function UploadPage() {
         }
     };
 
-    if (authLoading || !user) {
+    if (!isLoaded || !user) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-black">
                 <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin" />

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
-import { AuthProvider } from "@/context/AuthContext";
+// AuthProvider removed - using Clerk
 import Navbar from "@/components/Navbar";
 
 const inter = Inter({
@@ -20,13 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-slate-950 text-white min-h-screen`}>
-        <AuthProvider>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${inter.className} bg-slate-950 text-white min-h-screen`}>
           <Navbar />
           <main>{children}</main>
-        </AuthProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -2,7 +2,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IAccount extends Document {
     _id: mongoose.Types.ObjectId;
-    userId: mongoose.Types.ObjectId;
+    userId: string;
     bankName: string;
     accountType: 'savings' | 'current' | 'credit';
     accountNumber: string;
@@ -14,9 +14,9 @@ export interface IAccount extends Document {
 const AccountSchema: Schema = new Schema(
     {
         userId: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
+            type: String, // Clerk ID
             required: [true, 'User ID is required'],
+            index: true,
         },
         bankName: {
             type: String,
