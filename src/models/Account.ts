@@ -6,6 +6,7 @@ export interface IAccount extends Document {
     bankName: string;
     accountType: 'savings' | 'current' | 'credit';
     accountNumber: string;
+    balance: number;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -32,6 +33,10 @@ const AccountSchema: Schema = new Schema(
             type: String,
             required: false,
             trim: true,
+        },
+        balance: {
+            type: Number,
+            default: 0,
         },
     },
     {

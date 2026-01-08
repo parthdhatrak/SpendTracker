@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { usePathname } from 'next/navigation';
+import { MessageCircle } from 'lucide-react';
 
 export default function Navbar() {
     const { user, logout } = useAuth();
@@ -48,6 +49,18 @@ export default function Navbar() {
 
                     {/* User Menu */}
                     <div className="flex items-center gap-4">
+                        {user && (
+                            <Link
+                                href="/chat"
+                                className={`p-2 rounded-full transition-colors ${pathname === '/chat'
+                                    ? 'text-white bg-zinc-800'
+                                    : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                                    }`}
+                                aria-label="Open Financial Assistant"
+                            >
+                                <MessageCircle size={20} />
+                            </Link>
+                        )}
                         <span className="text-sm text-zinc-500 hidden sm:block">
                             <span className="text-white font-medium">Demo Mode</span>
                         </span>
@@ -76,6 +89,7 @@ export default function Navbar() {
                     </div>
                 )
             }
+
         </nav >
     );
 }
