@@ -1,0 +1,414 @@
+﻿node.exe : (node:4780) 
+ExperimentalWarning: 
+CommonJS module 
+C:\Users\Varad Dhatrak\AppDa
+ta\Roaming\npm\node_modules\
+npm\node_modules\debug\src\n
+ode.js is loading ES Module 
+C:\Users\Varad Dhatrak\AppDa
+ta\Roaming\npm\node_modules\
+npm\node_modules\supports-co
+lor\index.js using 
+require().
+At C:\Program 
+Files\nodejs\npx.ps1:29 
+char:3
++   & $NODE_EXE $NPX_CLI_JS 
+$args
++   ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo          
+    : NotSpecified: ((node  
+  :4780) Exp...sing requi   
+ re().:String) [], Remot    
+eException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
+Support for loading ES 
+Module in require() is an 
+experimental feature and 
+might change at any time
+(Use `node --trace-warnings 
+...` to show where the 
+warning was created)
+Γû▓ Next.js 16.1.1 (Turbopack)
+- Environments: .env.local
+
+ΓÜá The "middleware" file 
+convention is deprecated. 
+Please use "proxy" instead. 
+Learn more: https://nextjs.o
+rg/docs/messages/middleware-
+to-proxy
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build 
+failed with 4 errors:
+./src/app/api/auth/login/rou
+te.ts:4:1
+Export comparePassword 
+doesn't exist in target 
+module
+[0m [90m 2 |[39m 
+[36mimport[39m connectDB 
+[36mfrom[39m [32m'@/lib/m
+ongodb'[39m[33m;[39m
+ [90m 3 |[39m 
+[36mimport[39m 
+[33mUser[39m 
+[36mfrom[39m [32m'@/model
+s/User'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 
+|[39m [36mimport[39m { 
+comparePassword[33m,[39m 
+generateToken } 
+[36mfrom[39m [32m'@/lib/a
+uth'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m 
+[36mexport[39m 
+[36masync[39m 
+[36mfunction[39m [33mPOST
+[39m(request[33m:[39m 
+[33mNextRequest[39m) {
+ [90m 7 |[39m     
+[36mtry[39m {[0m
+
+The export comparePassword 
+was not found in module 
+[project]/src/lib/auth.ts 
+[app-route] (ecmascript).
+Did you mean to import 
+getUserFromRequest?
+All exports of the module 
+are statically known (It 
+doesn't have dynamic 
+exports). So it's known 
+statically that the 
+requested export doesn't 
+exist.
+
+
+./src/app/api/auth/login/rou
+te.ts:4:1
+Export generateToken 
+doesn't exist in target 
+module
+[0m [90m 2 |[39m 
+[36mimport[39m connectDB 
+[36mfrom[39m [32m'@/lib/m
+ongodb'[39m[33m;[39m
+ [90m 3 |[39m 
+[36mimport[39m 
+[33mUser[39m 
+[36mfrom[39m [32m'@/model
+s/User'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 
+|[39m [36mimport[39m { 
+comparePassword[33m,[39m 
+generateToken } 
+[36mfrom[39m [32m'@/lib/a
+uth'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m 
+[36mexport[39m 
+[36masync[39m 
+[36mfunction[39m [33mPOST
+[39m(request[33m:[39m 
+[33mNextRequest[39m) {
+ [90m 7 |[39m     
+[36mtry[39m {[0m
+
+The export generateToken 
+was not found in module 
+[project]/src/lib/auth.ts 
+[app-route] (ecmascript).
+Did you mean to import 
+getUserFromRequest?
+All exports of the module 
+are statically known (It 
+doesn't have dynamic 
+exports). So it's known 
+statically that the 
+requested export doesn't 
+exist.
+
+
+./src/app/api/auth/register/
+route.ts:4:1
+Export generateToken 
+doesn't exist in target 
+module
+[0m [90m 2 |[39m 
+[36mimport[39m connectDB 
+[36mfrom[39m [32m'@/lib/m
+ongodb'[39m[33m;[39m
+ [90m 3 |[39m 
+[36mimport[39m 
+[33mUser[39m 
+[36mfrom[39m [32m'@/model
+s/User'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 
+|[39m [36mimport[39m { 
+hashPassword[33m,[39m 
+generateToken } 
+[36mfrom[39m [32m'@/lib/a
+uth'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m 
+[36mexport[39m 
+[36masync[39m 
+[36mfunction[39m [33mPOST
+[39m(request[33m:[39m 
+[33mNextRequest[39m) {
+ [90m 7 |[39m     
+[36mtry[39m {[0m
+
+The export generateToken 
+was not found in module 
+[project]/src/lib/auth.ts 
+[app-route] (ecmascript).
+Did you mean to import 
+getUserFromRequest?
+All exports of the module 
+are statically known (It 
+doesn't have dynamic 
+exports). So it's known 
+statically that the 
+requested export doesn't 
+exist.
+
+
+./src/app/api/auth/register/
+route.ts:4:1
+Export hashPassword doesn't 
+exist in target module
+[0m [90m 2 |[39m 
+[36mimport[39m connectDB 
+[36mfrom[39m [32m'@/lib/m
+ongodb'[39m[33m;[39m
+ [90m 3 |[39m 
+[36mimport[39m 
+[33mUser[39m 
+[36mfrom[39m [32m'@/model
+s/User'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 
+|[39m [36mimport[39m { 
+hashPassword[33m,[39m 
+generateToken } 
+[36mfrom[39m [32m'@/lib/a
+uth'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m[31m[1m^[22m[39m
+[31m[1m^[22m[39m[31m[1
+m^[22m[39m[31m[1m^[22m
+[39m[31m[1m^[22m[39m[31
+m[1m^[22m[39m[31m[1m^[
+22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m 
+[36mexport[39m 
+[36masync[39m 
+[36mfunction[39m [33mPOST
+[39m(request[33m:[39m 
+[33mNextRequest[39m) {
+ [90m 7 |[39m     
+[36mtry[39m {[0m
+
+The export hashPassword was 
+not found in module 
+[project]/src/lib/auth.ts 
+[app-route] (ecmascript).
+Did you mean to import 
+getUserFromRequest?
+All exports of the module 
+are statically known (It 
+doesn't have dynamic 
+exports). So it's known 
+statically that the 
+requested export doesn't 
+exist.
+
+
+    at <unknown> (./src/app/
+api/auth/login/route.ts:4:1)
+    at <unknown> (./src/app/
+api/auth/login/route.ts:4:1)
+    at <unknown> (./src/app/
+api/auth/register/route.ts:4
+:1)
+    at <unknown> (./src/app/
+api/auth/register/route.ts:4
+:1)
+Assertion failed: 
+!(handle->flags & 
+UV_HANDLE_CLOSING), file c:\
+ws\deps\uv\src\win\async.c, 
+line 76

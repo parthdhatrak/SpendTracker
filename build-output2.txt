@@ -1,0 +1,78 @@
+﻿
+> p1@0.1.0 build
+> next build
+
+Γû▓ Next.js 16.1.1 (Turbopack)
+- Environments: .env.local
+
+node.exe : ΓÜá The 
+"middleware" file 
+convention is 
+deprecated. Please 
+use "proxy" instead. 
+Learn more: https://n
+extjs.org/docs/messag
+es/middleware-to-prox
+y
+At C:\Program Files\n
+odejs\npm.ps1:29 
+char:3
++   & $NODE_EXE 
+$NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (ΓÜá The   
+  "middle...lewar    
+e-to-proxy:Strin    
+g) [], RemoteExc    
+eption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 10.6s
+  Running TypeScript ...
+  Collecting page data using 11 workers ...
+MockStore initialized
+MockStore initialized
+MockStore initialized
+MockStore initialized
+  Generating static pages using 11 workers (0/17) ...
+MockStore initialized
+  Generating static pages using 11 workers (4/17) 
+  Generating static pages using 11 workers (8/17) 
+Error occurred 
+prerendering page 
+"/login". Read more: 
+https://nextjs.org/do
+cs/messages/prerender
+-error
+Error: useAuth must 
+be used within an 
+AuthProvider
+    at d 
+(C:\Users\Varad Dhatr
+ak\OneDrive\Desktop\p
+1\.next\server\chunks
+\ssr\src_8544ff2d._.j
+s:1:172)
+    at f 
+(C:\Users\Varad Dhatr
+ak\OneDrive\Desktop\p
+1\.next\server\chunks
+\ssr\src_8544ff2d._.j
+s:1:476) {
+  digest: 
+'2440534337'
+}
+Export encountered 
+an error on 
+/login/page: /login, 
+exiting the build.
+Γ¿» Next.js build 
+worker exited with 
+code: 1 and signal: 
+null
